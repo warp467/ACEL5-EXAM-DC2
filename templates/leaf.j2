@@ -33,13 +33,16 @@ router bgp {{ underlay[inventory_hostname]['BGP']['ASN'] }}
    neighbor SPINE_Underlay maximum-routes 12000
 
 {# This is overlay to the spines#}
-   bgp listen range 10.0.0.0/8 peer-group EVPN_OVERLAY peer-filter SPINE-AS-RANGE
+{# no bgp listen range 10.0.0.0/8 peer-group EVPN_OVERLAY peer-filter SPINE-AS-RANGE #}
    neighbor EVPN_OVERLAY peer group
    neighbor EVPN_OVERLAY remote-as {{ underlay[inventory_hostname]['BGP']['spine-ASN'] }}
    neighbor EVPN_OVERLAY update-source Loopback0
    neighbor EVPN_OVERLAY ebgp-multihop
    neighbor EVPN_OVERLAY send-community
    neighbor EVPN_OVERLAY maximum-routes 12000
+   neighbor 10.2.0.101 peer group EVPN_OVERLAY
+   neighbor 10.2.0.102 peer group EVPN_OVERLAY
+   neighbor 10.2.0.103 peer group EVPN_OVERLAY
 
 {# This is the connection to the leaf peer #}
 

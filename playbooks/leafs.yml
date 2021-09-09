@@ -13,7 +13,6 @@
     template:
       src: "{{lookup('env','PWD')}}/templates/leaf.j2"
       dest: "{{lookup('env','PWD')}}/configs/{{inventory_hostname}}_leaf.cfg"
-# Use the eos_config module to create a task to upload the configuration you created to the switch
-#   - name: Upload config
-#     eos_config:
-#       src: "{{lookup('env','PWD')}}/configs/{{inventory_hostname}}_leaf.cfg"
+  - name: Upload config
+    eos_config:
+      src: "{{lookup('env','PWD')}}/configs/{{inventory_hostname}}_leaf.cfg"
